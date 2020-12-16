@@ -8,12 +8,12 @@ I=pd.read_csv('istanze.csv')
 I=I.to_numpy() #trasformo in una matrice
 
 F=open('features.csv','w')
-F.write('f1_1,f1_2,f1_3,f1_4,f2_1,f2_2,f3_1,f3_2,f4_1,f4_2,f4_3,f4_4,,f6,f7_1,f7_2,f7_3,f7_4,f7_5,f7_6,f7_7,f7_8,f7_9\n')
+F.write('id,f1_1,f1_2,f1_3,f1_4,f2_1,f2_2,f3_1,f3_2,f4_1,f4_2,f4_3,f4_4,,f6,f7_1,f7_2,f7_3,f7_4,f7_5,f7_6,f7_7,f7_8,f7_9\n')
 
 for ist in range(30):
 
     ''' IMPORTO L'ISTANZA '''
-    graphFile,s,t,C,W=I[ist]
+    ID,graphFile,s,t,C,W=I[ist]
     n,m,nodes,edges,adj,costs,res=lettura.readGraph(graphFile)
     
     ''' CALCOLO CAMMINO MINIMO RISPETTO AI COSTI '''
@@ -34,7 +34,7 @@ for ist in range(30):
     f1_3 = minRes_cost/C
     f1_4 = minRes_keys[t]/W
     
-    F.write('%g,' % f1_1 + '%g,' % f1_2 + '%g,' % f1_3 + '%g,' % f1_4)
+    F.write('%d,' % ID + '%g,' % f1_1 + '%g,' % f1_2 + '%g,' % f1_3 + '%g,' % f1_4)
     
     ''' 2. Percentuale archi usati '''
     f2_1 = len(minCost_edges)/m

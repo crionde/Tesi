@@ -62,13 +62,11 @@ I=pd.read_csv('istanze.csv')
 I=I.to_numpy() #trasformo in una matrice
 
 G=open('MIP_solution.csv','w')
-G.write('feasibility,time\n')
+G.write('id,feasibility,time\n')
 
-#for ist in I:
-for ist in range(30):
+for ist in I:
     start=time.time()
-    #graphFile,s,t,C,W=ist
-    graphFile,s,t,C,W=I[ist]
+    ID,graphFile,s,t,C,W=ist
     n,m,nodes,edges,adj,costs,res=lettura.readGraph(graphFile)
     
     ist={None : {}} # dizionario contenente l'istanza
@@ -85,15 +83,15 @@ for ist in range(30):
     results = solver.solve(instance)
     
     if results.Solver._list[0]['Termination condition'] == 'infeasible':
-        G.write('I,%g\n' % (time.time()-start))
+        G.write('%d,' % ID + 'I,%g\n' % (time.time()-start))
     else:
-        G.write('F,%g\n' % (time.time()-start))
+        G.write('%d,' % ID + 'F,%g\n' % (time.time()-start))
     mean+=time.time()-start
 
 G.close()
 
-#print(mean/len(I)) #stampa tempo medio
-print(mean/30)
+print(mean/len(I)) #stampa tempo medio
+
 
 
 

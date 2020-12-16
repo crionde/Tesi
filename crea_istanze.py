@@ -44,7 +44,8 @@ for i in range(20):
 ''' 3. CREAZIONE DELLE ISTANZE
 (PER OGNI GRAFO 10 COPPIE s-t, PER OGNI COPPIA 5 LIMITE RISORSA)'''
 F=open('istanze.csv','w')
-F.write('file,s,t,C,W\n')
+F.write('id,file,s,t,C,W\n')
+cont=1 #indice istanza corrente
 
 for i in range(200): #ciclo sui grafi
     n,_,nodes,*_=lettura.readGraph('Grafi/grafo%03d.gr' % (i+1))
@@ -60,7 +61,8 @@ for i in range(200): #ciclo sui grafi
         for k in range(5): #per ogni coppia s-t creo 5 limite risorsa
             W=random.randint(inf_W,sup_W)
             C=random.randint(70000,105000)
-            F.write('Grafi/grafo%03d.gr,' % (i+1) + '%d,' %s + '%d,' %t + '%d,' %C + '%d\n' % W)
+            F.write('%d,' % cont + 'Grafi/grafo%03d.gr,' % (i+1) + '%d,' %s + '%d,' %t + '%d,' %C + '%d\n' % W)
+            cont+=1
             inf_W+=5000
             sup_W+=5000
             
