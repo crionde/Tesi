@@ -10,10 +10,10 @@ I=I.to_numpy() #trasformo in una matrice
 F=open('features.csv','w')
 F.write('id,f1_1,f1_2,f1_3,f1_4,f2_1,f2_2,f3_1,f3_2,f4_1,f4_2,f4_3,f4_4,,f6,f7_1,f7_2,f7_3,f7_4,f7_5,f7_6,f7_7,f7_8,f7_9\n')
 
-for ist in range(30):
+for ist in I:
 
     ''' IMPORTO L'ISTANZA '''
-    ID,graphFile,s,t,C,W=I[ist]
+    ID,graphFile,s,t,C,W=ist
     n,m,nodes,edges,adj,costs,res=lettura.readGraph(graphFile)
     
     ''' CALCOLO CAMMINO MINIMO RISPETTO AI COSTI '''
